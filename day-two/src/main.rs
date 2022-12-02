@@ -25,7 +25,7 @@ enum Type {
 fn get_choices(content: String) -> [Vec<Type>; 2] {
     let mut opponent_choices: Vec<Type> = Vec::new();
     let mut my_choices: Vec<Type> = Vec::new();
-    for line in content.split('\n') {
+    for line in content.lines() {
         let current_opponent_choice = line.chars().nth(0).unwrap();
         match current_opponent_choice {
             'A' => opponent_choices.push(Type::Rock),

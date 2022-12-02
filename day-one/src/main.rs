@@ -17,7 +17,7 @@ fn get_elves(content: String) -> Vec<Vec<usize>> {
     elves.push(Vec::new());
     // get elves out of context
     let mut index: usize = 0;
-    for food_item in content.split('\n') {
+    for food_item in content.lines() {
         if food_item == "" {
             elves.push(Vec::new());
             index += 1;
