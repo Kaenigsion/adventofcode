@@ -2,7 +2,7 @@ use std::{fs, iter::Iterator};
 
 fn main() {
     let path = "day-one/puzzle-input.txt";
-    let content = fs::read_to_string(path).expect("couldnt open file");
+    let content = fs::read_to_string(path).expect("couldn't open file");
     let elves = get_elves(content);
     let [most_calories, sum_three_most_calories] = get_elf_with_most_calories(elves);
     println!("The elf carrying the most calories is {}.", most_calories);

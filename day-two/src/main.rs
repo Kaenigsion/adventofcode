@@ -2,10 +2,8 @@ use std::fs;
 
 fn main() {
     let path = "day-two/puzzle-input.txt";
-    let content = fs::read_to_string(path)
-        .expect("couldnt open file")
-        .trim()
-        .to_string();
+    let content = fs::read_to_string(path).expect("couldn't open file");
+
     let choices = get_choices(content);
     let total_score = calculate_total_score(choices.clone());
     println!("The total score is {}", total_score);
@@ -67,6 +65,7 @@ fn calculate_total_score(choices: [Vec<Type>; 2]) -> usize {
     return total_score;
 }
 
+// PART 2---
 fn calculate_total_win_score(choices: [Vec<Type>; 2]) -> usize {
     let [opponent_choices, my_choices] = choices;
     let mut new_my_choices: Vec<Type> = Vec::new();
