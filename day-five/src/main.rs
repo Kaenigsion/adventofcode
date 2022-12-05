@@ -5,11 +5,12 @@ use itertools::Itertools;
 fn main() {
     let path = "day-five/puzzle-input.txt";
     let content = fs::read_to_string(path).expect("couldn't open file");
-    let value = read_file_and_count_highest_stack(content);
-    println!("{}", value)
+    let [value, value_part_two] = read_file_and_count_highest_stack(content);
+    println!("Part 1: {}.", value);
+    println!("Part 2: {}.", value_part_two);
 }
 
-fn read_file_and_count_highest_stack(content: String) -> String {
+fn read_file_and_count_highest_stack(content: String) -> [String; 2] {
     let mut stacks: BTreeMap<usize, Vec<char>> = BTreeMap::new();
     let mut break_index = 0;
     for (index, line) in content.lines().enumerate() {
@@ -33,6 +34,8 @@ fn read_file_and_count_highest_stack(content: String) -> String {
         }
     }
 
+    //part 2
+    let mut stacks_part_two = stacks.clone();
     for index in break_index..content.lines().count() {
         let line = content.lines().nth(index).unwrap();
 
@@ -49,8 +52,18 @@ fn read_file_and_count_highest_stack(content: String) -> String {
             let containers = stack.drain(..count).rev().collect::<Vec<char>>();
 
             let previous_containers = stacks.get(&end).unwrap().clone();
-            let new_containers = [containers, previous_containers].concat();
+            let new_containers = [containers, previous_containers.clone()].concat();
+
             stacks.insert(end, new_containers);
+
+            // part 2
+            let stack = stacks_part_two.get_mut(&start).unwrap();
+            let containers_part_two = stack.drain(..count).collect::<Vec<char>>();
+
+            let previous_containers = stacks_part_two.get(&end).unwrap().clone();
+            let new_containers_part_two = [containers_part_two, previous_containers].concat();
+
+            stacks_part_two.insert(end, new_containers_part_two);
         }
     }
 
@@ -58,5 +71,14 @@ fn read_file_and_count_highest_stack(content: String) -> String {
     for value in stacks.values() {
         top_stack.push(*value.first().unwrap())
     }
-    return top_stack.iter().collect();
+
+    // part 2
+    let mut top_stack_part_two = Vec::new();
+    for value in stacks_part_two.values() {
+        top_stack_part_two.push(*value.first().unwrap())
+    }
+    return [
+        top_stack.iter().collect(),
+        top_stack_part_two.iter().collect(),
+    ];
 }
