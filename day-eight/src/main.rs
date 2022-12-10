@@ -51,56 +51,6 @@ fn get_amount_visible_trees(content: String) -> usize {
             for i in (tree_row_index + 1)..amount_rows {
                 right_trees.push(forest_array[tree_column_index][i]);
             }
-            // // Part 2:
-            // let mut is_bigger = false;
-            // let mut multiplier = top_trees
-            //     .iter()
-            //     .filter(|&&x| {
-            //         if x >= tree_height {
-            //             is_bigger = true;
-            //         }
-            //         dbg!(x);
-            //         return !is_bigger && x < tree_height;
-            //     })
-            //     .count();
-            // dbg!(multiplier);
-            // let mut is_bigger = false;
-            // multiplier += bottom_trees
-            //     .iter()
-            //     .filter(|&&x| {
-            //         if x >= tree_height {
-            //             is_bigger = true;
-            //         }
-            //         dbg!(x);
-            //         return is_bigger && x < tree_height;
-            //     })
-            //     .count();
-            // dbg!(multiplier);
-            // let mut is_bigger = false;
-            // multiplier += left_trees
-            //     .iter()
-            //     .filter(|&&x| {
-            //         if x >= tree_height {
-            //             is_bigger = true;
-            //         }
-            //         dbg!(x);
-            //         return is_bigger && x < tree_height;
-            //     })
-            //     .count();
-            // dbg!(multiplier);
-            // let mut is_bigger = false;
-            // multiplier += right_trees
-            //     .iter()
-            //     .filter(|&&x| {
-            //         if x >= tree_height {
-            //             is_bigger = true;
-            //         }
-            //         dbg!(x);
-            //         return is_bigger && x < tree_height;
-            //     })
-            //     .count();
-
-            // dbg!(multiplier, tree_height);
 
             // Part 1:
             top_trees.sort();
