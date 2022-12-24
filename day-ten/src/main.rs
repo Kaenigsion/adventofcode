@@ -31,6 +31,9 @@ fn get_signal_strengths(content: String) -> i32 {
         }
     });
 
+    // Part 2
+
+    // Part 1
     let sum = result
         .iter()
         .enumerate()
