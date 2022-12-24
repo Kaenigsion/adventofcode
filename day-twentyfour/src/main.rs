@@ -4,7 +4,8 @@ fn main() {
     let path = "day-twentyfour/puzzle-input.txt";
     let content = fs::read_to_string(path).expect("couldn't open file");
 
-    get_shortest_path(content);
+    let mut minutes = get_shortest_path(content);
+    println!("The shortest path takes {} minutest time.", minutes);
 }
 
 #[derive(Debug, Clone, Copy)]
