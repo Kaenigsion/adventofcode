@@ -127,27 +127,36 @@ fn get_shortest_path(content: String) -> u32 {
                 field[player.position_y - 1][player.position_x] == '.'
             };
             let has_surrounding_bottom = field[player.position_y + 1][player.position_x] == '.';
-            [
+
+            let mut last_player_index: usize = 0;
+
+            let all_surroundings = [
                 has_surrounding_top,
                 has_surrounding_right,
                 has_surrounding_bottom,
                 has_surrounding_left,
-            ]
-            .iter()
-            .enumerate()
-            .filter(|(_, &is_valid)| is_valid)
-            .for_each(|(index, _)| {
-                players.remove(0);
-                match index {
-                    0 => players.push(Player::new([player.position_x, player.position_y - 1])),
-                    1 => players.push(Player::new([player.position_x + 1, player.position_y])),
-                    2 => players.push(Player::new([player.position_x, player.position_y + 1])),
-                    3 => players.push(Player::new([player.position_x - 1, player.position_y])),
-                    _ => panic!(),
-                };
-                println!("index: {}", index)
-            });
+            ];
+            all_surroundings
+                .iter()
+                .enumerate()
+                .filter(|(_, &is_valid)| is_valid)
+                .for_each(|(index, _)| {
+                    players.remove(last_player_index);
+                    match index {
+                        0 => players.push(Player::new([player.position_x, player.position_y - 1])),
+                        1 => players.push(Player::new([player.position_x + 1, player.position_y])),
+                        2 => players.push(Player::new([player.position_x, player.position_y + 1])),
+                        3 => players.push(Player::new([player.position_x - 1, player.position_y])),
+                        _ => panic!(),
+                    };
+                    println!("index: {}", index)
+                });
 
+            last_player_index += all_surroundings
+                .iter()
+                .enumerate()
+                .filter(|(_, &is_valid)| is_valid)
+                .count();
             dbg!(
                 has_surrounding_top,
                 has_surrounding_right,
