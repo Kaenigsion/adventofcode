@@ -1,0 +1,14 @@
+
+[workspace]
+members = [
+    "day-one",
+    "day-two",
+    "day-three",
+    "day-four",
+    "day-five",
+    "day-six",
+    "day-seven",
+    "day-eight",
+    "day-ten",
+    "day-twentyfour",
+]
