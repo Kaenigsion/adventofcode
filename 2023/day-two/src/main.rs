@@ -4,7 +4,7 @@ fn main() {
     let path = "day-two/puzzle_input.txt";
     let content = fs::read_to_string(path).expect("couldn't open file");
     let sum1 = get_sum_of_game_ids(content.clone());
-    let sum2 = denoise_and_get_sum2(content);
+    let sum2 = get_sum_of_power_mins(content);
 
     println!("p1: {sum1}");
     println!("p2: {sum2}");
@@ -118,7 +118,7 @@ fn get_sum_of_game_ids(content: String) -> usize {
 }
 
 // p2
-fn denoise_and_get_sum2(content: String) -> usize {
+fn get_sum_of_power_mins(content: String) -> usize {
     let mut games = Vec::new();
     for line in content.lines() {
         let (_, rest) = line.split_once(':').unwrap();
