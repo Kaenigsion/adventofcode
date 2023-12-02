@@ -44,9 +44,16 @@ impl GameSet {
 
         GameSet { quantity, color }
     }
+    fn get_max_quantity(cubes: &Vec<Self>, color: Color) -> usize {
+        cubes
+            .iter()
+            .filter(|x| x.color == color)
+            .map(|x| x.quantity)
+            .max()
+            .unwrap()
+    }
 
     // p1
-
     fn matches_predicate(cubes: &Vec<Self>) -> bool {
         let cubes_red = GameSet::get_max_quantity(cubes, Color::Red);
         let cubes_blue = GameSet::get_max_quantity(cubes, Color::Blue);
@@ -59,32 +66,13 @@ impl GameSet {
         false
     }
 
-    fn get_max_quantity(cubes: &Vec<Self>, color: Color) -> usize {
-        cubes
-            .iter()
-            .filter(|x| x.color == color)
-            .map(|x| x.quantity)
-            .max()
-            .unwrap()
-    }
-
     // p2
-
     fn get_power_of_mins(cubes: &Vec<Self>) -> usize {
-        let cubes_red = GameSet::get_min_quantity(cubes, Color::Red);
-        let cubes_blue = GameSet::get_min_quantity(cubes, Color::Blue);
-        let cubes_green = GameSet::get_min_quantity(cubes, Color::Green);
+        let cubes_red = GameSet::get_max_quantity(cubes, Color::Red);
+        let cubes_blue = GameSet::get_max_quantity(cubes, Color::Blue);
+        let cubes_green = GameSet::get_max_quantity(cubes, Color::Green);
 
         cubes_red * cubes_blue * cubes_green
-    }
-
-    fn get_min_quantity(cubes: &Vec<Self>, color: Color) -> usize {
-        cubes
-            .iter()
-            .filter(|x| x.color == color)
-            .map(|x| x.quantity)
-            .max()
-            .unwrap()
     }
 }
 
