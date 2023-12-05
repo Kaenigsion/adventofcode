@@ -7,7 +7,7 @@ fn main() {
     let location1 = get_nearest_location1(content.clone());
     println!("p1: {location1}");
 
-    let location2 = get_nearest_location2(content.clone());
+    let location2 = get_nearest_location2(content);
     println!("p2: {location2}");
 }
 
@@ -16,7 +16,7 @@ fn get_nearest_location1(content: String) -> usize {
     let (_, seed_line) = content.lines().next().unwrap().split_once(':').unwrap();
     let seeds: Vec<usize> = seed_line
         .trim()
-        .split(" ")
+        .split(' ')
         .map(|x| x.parse().unwrap())
         .collect();
 
@@ -27,7 +27,7 @@ fn get_nearest_location1(content: String) -> usize {
 
         for line in lines.trim().lines().skip(1) {
             for (destination, source, range) in line
-                .split(" ")
+                .split(' ')
                 .map(|x| x.trim().parse::<usize>().unwrap())
                 .tuples()
             {
@@ -41,15 +41,15 @@ fn get_nearest_location1(content: String) -> usize {
 
     for seed in seeds {
         let mut previous = seed;
-        for index in 0..7 {
+        for item in table.iter().take(7) {
             let mut i: Option<(usize, usize)> = None;
-            table[index].0.iter().enumerate().for_each(|(k, x)| {
+            item.0.iter().enumerate().for_each(|(k, x)| {
                 if let Some((j, _)) = (x.0..x.1).find_position(|x| x == &previous) {
                     i = Some((k, j));
                 }
             });
             if let Some((k, j)) = i {
-                let start_end = table[index].1[k];
+                let start_end = item.1[k];
                 let value = (start_end.0..start_end.1).nth(j).unwrap();
                 previous = value;
             }
@@ -66,7 +66,7 @@ fn get_nearest_location2(content: String) -> usize {
     let mut seeds: Vec<usize> = vec![];
     seed_line
         .trim()
-        .split(" ")
+        .split(' ')
         .map(|x| x.parse().unwrap())
         .tuples()
         .for_each(|(start, length)| seeds.append(&mut Vec::from_iter(start..(start + length))));
@@ -78,7 +78,7 @@ fn get_nearest_location2(content: String) -> usize {
 
         for line in lines.trim().lines().skip(1) {
             for (destination, source, range) in line
-                .split(" ")
+                .split(' ')
                 .map(|x| x.trim().parse::<usize>().unwrap())
                 .tuples()
             {
@@ -93,21 +93,21 @@ fn get_nearest_location2(content: String) -> usize {
 
     for seed in seeds {
         let mut previous = seed;
-        for index in 0..7 {
+        for item in table.iter().take(7) {
             let mut i: Option<(usize, usize)> = None;
-            table[index].0.iter().enumerate().for_each(|(k, x)| {
+            item.0.iter().enumerate().for_each(|(k, x)| {
                 if let Some((j, _)) = (x.0..x.1).find_position(|x| x == &previous) {
                     i = Some((k, j));
                 }
             });
             if let Some((k, j)) = i {
-                let start_end = table[index].1[k];
+                let start_end = item.1[k];
                 let value = (start_end.0..start_end.1).nth(j).unwrap();
                 previous = value;
             }
         }
 
-        println!("{}", previous);
+        // println!("{}", previous);
 
         if previous < locations {
             locations = previous;
