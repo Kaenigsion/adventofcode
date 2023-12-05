@@ -4,8 +4,8 @@ use std::fs;
 fn main() {
     let path = "day-five/puzzle_input.txt";
     let content = fs::read_to_string(path).expect("couldn't open file");
-    // let location1 = get_nearest_location1(content.clone());
-    // println!("p1: {location1}");
+    let location1 = get_nearest_location1(content.clone());
+    println!("p1: {location1}");
 
     let location2 = get_nearest_location2(content.clone());
     println!("p2: {location2}");
