@@ -30,13 +30,13 @@ fn sum_extrapolated_values1(content: String) -> isize {
             extrapolated_values.push(new_extrapolated_values);
         }
 
-        let sth = extrapolated_values
+        let value = extrapolated_values
             .iter()
             .map(|x| *x.last().unwrap())
             .reduce(|acc, e| acc + e)
             .unwrap();
 
-        sum += sth;
+        sum += value;
     }
     sum
 }
@@ -61,14 +61,14 @@ fn sum_extrapolated_values2(content: String) -> isize {
             extrapolated_values.push(new_extrapolated_values);
         }
 
-        let sth = extrapolated_values
+        let value = extrapolated_values
             .iter()
             .map(|x| *x.first().unwrap())
             .rev()
             .reduce(|acc, e| e - acc)
             .unwrap();
 
-        sum += sth;
+        sum += value;
     }
     sum
 }
